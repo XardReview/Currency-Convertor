@@ -41,3 +41,8 @@ def inr_to_rub(amount):
     if rate:
         return amount * (rate / 10)
     return None
+def kzt_to_rub(amount):
+    rate = get_exchange_rate("KZT")
+    if rate:
+        return amount * (rate / 100)
+    return None

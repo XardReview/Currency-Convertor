@@ -127,3 +127,26 @@ def inr_to_rub(amount_inr):
 
     amount_rub = amount_inr * rub_rate
     return amount_rub
+
+def get_kzt_exchange_rate():
+    try:
+        url = 'https://www.cbr.ru/scripts/XML_daily.asp'
+        response = requests.get(url)
+        soup = BeautifulSoup(response.content, 'html.parser')
+
+        valute_dict = {}
+        valute_tags = soup.find_all('valute')
+        for tag in valute_tags:
+            valute_dict[tag.find('charcode').get_text()] = float(tag.find('value').get_text().replace(',', '.'))
+
+        return valute_dict.get('KZT')
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return None
+def kzt_to_rub(amount_kzt):
+    rub_rate = get_kzt_exchange_rate()
+    if rub_rate is None:
+        return None
+
+    amount_rub = amount_kzt * rub_rate
+    return amount_rub

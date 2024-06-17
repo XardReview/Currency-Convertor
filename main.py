@@ -25,6 +25,8 @@ def main(page: ft.Page):
             rub_amount = cny_to_rub(amount)
         elif currency == "INR":
             rub_amount = inr_to_rub(amount)
+        elif currency == "KZT":
+            rub_amount = kzt_to_rub(amount)
         else:
             rub_amount = None
 
@@ -36,6 +38,7 @@ def main(page: ft.Page):
                 uzs_exchange_rate_text.value = ""
                 cny_exchange_rate_text.value = ""
                 inr_exchange_rate_text.value = ""
+                kzt_exchange_rate_text.value = ""
             elif currency == "EUR":
                 result_text.value = f"{amount} Евро = {round(rub_amount, 2)} рублей"
                 usd_exchange_rate_text.value = ""
@@ -43,6 +46,7 @@ def main(page: ft.Page):
                 uzs_exchange_rate_text.value = ""
                 cny_exchange_rate_text.value = ""
                 inr_exchange_rate_text.value = ""
+                kzt_exchange_rate_text.value = ""
             elif currency == "UZS":
                 result_text.value = f"{amount} Узбекских сум = {round(rub_amount, 2)} рублей"
                 usd_exchange_rate_text.value = ""
@@ -50,6 +54,7 @@ def main(page: ft.Page):
                 uzs_exchange_rate_text.value = ""
                 cny_exchange_rate_text.value = ""
                 inr_exchange_rate_text.value = ""
+                kzt_exchange_rate_text.value = ""
             elif currency == "CNY":
                 result_text.value = f"{amount} Китайских юаней = {round(rub_amount, 2)} рублей"
                 usd_exchange_rate_text.value = ""
@@ -57,6 +62,7 @@ def main(page: ft.Page):
                 uzs_exchange_rate_text.value = ""
                 cny_exchange_rate_text.value = ""
                 inr_exchange_rate_text.value = ""
+                kzt_exchange_rate_text.value = ""
             elif currency == "INR":
                 result_text.value = f"{amount} Индийских рупий = {round(rub_amount, 2)} рублей"
                 usd_exchange_rate_text.value = ""
@@ -64,6 +70,15 @@ def main(page: ft.Page):
                 uzs_exchange_rate_text.value = ""
                 cny_exchange_rate_text.value = ""
                 inr_exchange_rate_text.value = ""
+                kzt_exchange_rate_text.value = ""
+            elif currency == "KZT":
+                result_text.value = f"{amount} Казахских тенге  = {round(rub_amount, 2)} рублей"
+                usd_exchange_rate_text.value = ""
+                eur_exchange_rate_text.value = ""
+                uzs_exchange_rate_text.value = ""
+                cny_exchange_rate_text.value = ""
+                inr_exchange_rate_text.value = ""
+                kzt_exchange_rate_text.value = ""
         else:
             result_text.value = "Не удалось получить актуальный курс обмена. Проверьте соединение с Интернетом или корректность ввода."
 
@@ -78,6 +93,7 @@ def main(page: ft.Page):
         uzs_exchange_rate_text.value = f" Узбекские сумы = {round(get_exchange_rate("UZS"), 2)}"
         cny_exchange_rate_text.value = f" Китайские юани = {round(get_exchange_rate("CNY"), 2)}"
         inr_exchange_rate_text.value = f" Индийские рупии = {round(get_exchange_rate("CNY"), 2)}"
+        kzt_exchange_rate_text.value = f" Казахские тенге = {round(get_exchange_rate("KZT"), 2)}"
         page.update()
 
     def exchange_rates():
@@ -85,7 +101,8 @@ def main(page: ft.Page):
         eur_exchange_rate_text.value = f" Евро = {round(get_exchange_rate("EUR"), 2)}"
         uzs_exchange_rate_text.value = f" Узбекские сумы = {round(get_exchange_rate("UZS"), 2)}"
         cny_exchange_rate_text.value = f" Китайские юани = {round(get_exchange_rate("CNY"), 2)}"
-        inr_exchange_rate_text.value = f" Индийские рупии = {round(get_exchange_rate("CNY"), 2)}"
+        inr_exchange_rate_text.value = f" Индийские рупии = {round(get_exchange_rate("INR"), 2)}"
+        kzt_exchange_rate_text.value = f" Казахские тенге = {round(get_exchange_rate("KZT"), 2)}"
     currency_input = ft.Dropdown(
         label="Валюта",
         options=[
@@ -93,7 +110,8 @@ def main(page: ft.Page):
             ft.dropdown.Option(key="EUR", text="Евро"),
             ft.dropdown.Option(key="UZS", text="Узбекские сумы"),
             ft.dropdown.Option(key="CNY", text="Китайские юани"),
-            ft.dropdown.Option(key="INR", text="Индийские рупии")
+            ft.dropdown.Option(key="INR", text="Индийские рупии"),
+            ft.dropdown.Option(key="KZT", text="Казахские тенге")
         ],
         width=200
     )
@@ -106,6 +124,7 @@ def main(page: ft.Page):
     uzs_exchange_rate_text = ft.Text(style=ft.TextStyle(font_family="Arial", size=16))
     cny_exchange_rate_text = ft.Text(style=ft.TextStyle(font_family="Arial", size=16))
     inr_exchange_rate_text = ft.Text(style=ft.TextStyle(font_family="Arial", size=16))
+    kzt_exchange_rate_text = ft.Text(style=ft.TextStyle(font_family="Arial", size=16))
     exchange_rates()
     page.add(
         ft.Column(
@@ -125,7 +144,8 @@ def main(page: ft.Page):
                 ft.Container(eur_exchange_rate_text, alignment=ft.alignment.bottom_center),
                 ft.Container(uzs_exchange_rate_text, alignment=ft.alignment.bottom_center),
                 ft.Container(cny_exchange_rate_text, alignment=ft.alignment.bottom_center),
-                ft.Container(inr_exchange_rate_text, alignment=ft.alignment.bottom_center)
+                ft.Container(inr_exchange_rate_text, alignment=ft.alignment.bottom_center),
+                ft.Container(kzt_exchange_rate_text, alignment=ft.alignment.bottom_center)
             ],
             alignment=ft.MainAxisAlignment.CENTER,
             spacing=10,
