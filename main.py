@@ -1,7 +1,7 @@
 import flet as ft
 from conversion import *
-
-
+from  datetime import datetime
+previous_exchange_rates = {}
 def main(page: ft.Page):
     page.title = "Currency Converter"
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
@@ -89,12 +89,45 @@ def main(page: ft.Page):
         page.update()
 
     def update_exchange_rates():
-        usd_exchange_rate_text.value = f"Доллар США = {round(get_exchange_rate('USD'), 2)}"
-        eur_exchange_rate_text.value = f"Евро = {round(get_exchange_rate('EUR'), 2)}"
-        uzs_exchange_rate_text.value = f"Узбекские сумы = {round(get_exchange_rate('UZS'), 2)}"
-        cny_exchange_rate_text.value = f"Китайские юани = {round(get_exchange_rate('CNY'), 2)}"
-        inr_exchange_rate_text.value = f"Индийские рупии = {round(get_exchange_rate('INR'), 2)}"
-        kzt_exchange_rate_text.value = f"Казахские тенге = {round(get_exchange_rate('KZT'), 2)}"
+        global previous_exchange_rates
+
+        def get_rate_and_icon(currency_code):
+            new_rate = get_exchange_rate(currency_code)
+            previous_rate = previous_exchange_rates.get(currency_code, new_rate)
+            if new_rate > previous_rate:
+                icon_path = "up_arrow.png"
+            elif new_rate < previous_rate:
+                icon_path = "down_arrow.png"
+            else:
+                icon_path = "minus.png"  # Add a neutral icon if needed
+            previous_exchange_rates[currency_code] = new_rate
+            return new_rate, icon_path
+
+        usd_rate, usd_icon = get_rate_and_icon('USD')
+        eur_rate, eur_icon = get_rate_and_icon('EUR')
+        uzs_rate, uzs_icon = get_rate_and_icon('UZS')
+        cny_rate, cny_icon = get_rate_and_icon('CNY')
+        inr_rate, inr_icon = get_rate_and_icon('INR')
+        kzt_rate, kzt_icon = get_rate_and_icon('KZT')
+
+        usd_exchange_rate_text.value = f"Доллар США = {round(usd_rate, 2)}"
+        usd_exchange_rate_icon.src = usd_icon
+
+        eur_exchange_rate_text.value = f"Евро = {round(eur_rate, 2)}"
+        eur_exchange_rate_icon.src = eur_icon
+
+        uzs_exchange_rate_text.value = f"Узбекские сумы = {round(uzs_rate, 2)}"
+        uzs_exchange_rate_icon.src = uzs_icon
+
+        cny_exchange_rate_text.value = f"Китайские юани = {round(cny_rate, 2)}"
+        cny_exchange_rate_icon.src = cny_icon
+
+        inr_exchange_rate_text.value = f"Индийские рупии = {round(inr_rate, 2)}"
+        inr_exchange_rate_icon.src = inr_icon
+
+        kzt_exchange_rate_text.value = f"Казахские тенге = {round(kzt_rate, 2)}"
+        kzt_exchange_rate_icon.src = kzt_icon
+
         page.update()
 
     currency_input = ft.Dropdown(
@@ -121,12 +154,24 @@ def main(page: ft.Page):
     convert_button = ft.ElevatedButton(text="Конвертировать", on_click=convert)
     restart_button = ft.ElevatedButton(text="Перезапуск", on_click=restart)
     result_text = ft.Text(style=ft.TextStyle(font_family="Arial", size=16))
+
     usd_exchange_rate_text = ft.Text(style=ft.TextStyle(font_family="Arial", size=16))
+    usd_exchange_rate_icon = ft.Image(src="Minus.png", width=20, height=20)
+
     eur_exchange_rate_text = ft.Text(style=ft.TextStyle(font_family="Arial", size=16))
+    eur_exchange_rate_icon = ft.Image(src="Minus.png", width=20, height=20)
+
     uzs_exchange_rate_text = ft.Text(style=ft.TextStyle(font_family="Arial", size=16))
+    uzs_exchange_rate_icon = ft.Image(src="Minus.png", width=20, height=20)
+
     cny_exchange_rate_text = ft.Text(style=ft.TextStyle(font_family="Arial", size=16))
+    cny_exchange_rate_icon = ft.Image(src="Minus.png", width=20, height=20)
+
     inr_exchange_rate_text = ft.Text(style=ft.TextStyle(font_family="Arial", size=16))
+    inr_exchange_rate_icon = ft.Image(src="Minus.png", width=20, height=20)
+
     kzt_exchange_rate_text = ft.Text(style=ft.TextStyle(font_family="Arial", size=16))
+    kzt_exchange_rate_icon = ft.Image(src="Minus.png", width=20, height=20)
 
     update_exchange_rates()
 
@@ -149,18 +194,17 @@ def main(page: ft.Page):
                 ft.Container(
                     ft.Column(
                         [
-                            ft.Container(usd_exchange_rate_text, alignment=ft.alignment.center),
-                            ft.Container(eur_exchange_rate_text, alignment=ft.alignment.center),
-                            ft.Container(uzs_exchange_rate_text, alignment=ft.alignment.center),
-                            ft.Container(cny_exchange_rate_text, alignment=ft.alignment.center),
-                            ft.Container(inr_exchange_rate_text, alignment=ft.alignment.center),
-                            ft.Container(kzt_exchange_rate_text, alignment=ft.alignment.center),
+                            ft.Row([usd_exchange_rate_text, usd_exchange_rate_icon], alignment=ft.MainAxisAlignment.CENTER, spacing=5),
+                            ft.Row([eur_exchange_rate_text, eur_exchange_rate_icon], alignment=ft.MainAxisAlignment.CENTER, spacing=5),
+                            ft.Row([uzs_exchange_rate_text, uzs_exchange_rate_icon], alignment=ft.MainAxisAlignment.CENTER, spacing=5),
+                            ft.Row([cny_exchange_rate_text, cny_exchange_rate_icon], alignment=ft.MainAxisAlignment.CENTER, spacing=5),
+                            ft.Row([inr_exchange_rate_text, inr_exchange_rate_icon], alignment=ft.MainAxisAlignment.CENTER, spacing=5),
+                            ft.Row([kzt_exchange_rate_text, kzt_exchange_rate_icon], alignment=ft.MainAxisAlignment.CENTER, spacing=5),
                         ],
                         alignment=ft.MainAxisAlignment.CENTER,
                         spacing=10,
                     ),
-                    alignment=ft.alignment.center,
-                    padding=ft.Padding(0, -50, 0, 0),  # This will move the column up
+                    alignment=ft.alignment.center_right,
                     expand=True
                 ),
             ],
@@ -168,6 +212,5 @@ def main(page: ft.Page):
             expand=True
         )
     )
-
 
 ft.app(target=main)
