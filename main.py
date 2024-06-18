@@ -1,11 +1,11 @@
 import flet as ft
 from conversion import *
-from  datetime import datetime
 previous_exchange_rates = {}
 def main(page: ft.Page):
-    page.title = "Currency Converter"
+    page.title = "Конвертор валют"
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+    page.window_icon = "Currency Exchange.ico"
     def convert(e):
         currency = currency_input.value
         try:
@@ -95,11 +95,11 @@ def main(page: ft.Page):
             new_rate = get_exchange_rate(currency_code)
             previous_rate = previous_exchange_rates.get(currency_code, new_rate)
             if new_rate > previous_rate:
-                icon_path = "up_arrow.png"
+                icon_path = "Sort Up.png"
             elif new_rate < previous_rate:
-                icon_path = "down_arrow.png"
+                icon_path = "Sort Down.png"
             else:
-                icon_path = "minus.png"  # Add a neutral icon if needed
+                icon_path = "Minus.png"  # Add a neutral icon if needed
             previous_exchange_rates[currency_code] = new_rate
             return new_rate, icon_path
 
