@@ -131,36 +131,41 @@ def main(page: ft.Page):
     update_exchange_rates()
 
     page.add(
-        ft.Column(
+        ft.Row(
             [
-                ft.Container(direction_input, alignment=ft.alignment.center),
-                ft.Container(currency_input, alignment=ft.alignment.center),
-                ft.Container(amount_input, alignment=ft.alignment.center),
-                ft.Container(convert_button, alignment=ft.alignment.center),
-                ft.Container(restart_button, alignment=ft.alignment.center),
-                ft.Container(result_text, alignment=ft.alignment.center),
+                ft.Column(
+                    [
+                        ft.Container(direction_input, alignment=ft.alignment.center),
+                        ft.Container(currency_input, alignment=ft.alignment.center),
+                        ft.Container(amount_input, alignment=ft.alignment.center),
+                        ft.Container(convert_button, alignment=ft.alignment.center),
+                        ft.Container(restart_button, alignment=ft.alignment.center),
+                        ft.Container(result_text, alignment=ft.alignment.center),
+                    ],
+                    alignment=ft.MainAxisAlignment.CENTER,
+                    spacing=10,
+                    expand=True
+                ),
+                ft.Container(
+                    ft.Column(
+                        [
+                            ft.Container(usd_exchange_rate_text, alignment=ft.alignment.center),
+                            ft.Container(eur_exchange_rate_text, alignment=ft.alignment.center),
+                            ft.Container(uzs_exchange_rate_text, alignment=ft.alignment.center),
+                            ft.Container(cny_exchange_rate_text, alignment=ft.alignment.center),
+                            ft.Container(inr_exchange_rate_text, alignment=ft.alignment.center),
+                            ft.Container(kzt_exchange_rate_text, alignment=ft.alignment.center),
+                        ],
+                        alignment=ft.MainAxisAlignment.CENTER,
+                        spacing=10,
+                    ),
+                    alignment=ft.alignment.center,
+                    padding=ft.Padding(0, -50, 0, 0),  # This will move the column up
+                    expand=True
+                ),
             ],
-            alignment=ft.MainAxisAlignment.CENTER,
-            spacing=10,
+            alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
             expand=True
-        )
-    )
-
-    page.add(
-        ft.Container(
-            ft.Row(
-                [
-                    usd_exchange_rate_text,
-                    eur_exchange_rate_text,
-                    uzs_exchange_rate_text,
-                    cny_exchange_rate_text,
-                    inr_exchange_rate_text,
-                    kzt_exchange_rate_text
-                ],
-                alignment=ft.MainAxisAlignment.CENTER,
-                spacing=10
-            ),
-            alignment=ft.alignment.bottom_center
         )
     )
 
