@@ -46,3 +46,33 @@ def kzt_to_rub(amount):
     if rate:
         return amount * (rate / 100)
     return None
+def rub_to_usd(amount):
+    rate = get_exchange_rate("USD")
+    if rate:
+        return amount / rate
+    return None
+def rub_to_eur(amount):
+    rate = get_exchange_rate("EUR")
+    if rate:
+        return amount / rate
+    return None
+def rub_to_uzs(amount):
+    rate = get_exchange_rate("UZS")
+    if rate:
+        return amount / (rate / 10000)
+    return None
+def rub_to_cny(amount):
+    rate = get_exchange_rate("CNY")
+    if rate:
+        return amount / rate
+    return None
+def rub_to_inr(amount):
+    rate = get_exchange_rate("INR")
+    if rate:
+        return amount / (rate / 10)
+    return None
+def rub_to_kzt(amount):
+    rate = get_exchange_rate("KZT")
+    if rate:
+        return amount / (rate / 100)
+    return None
