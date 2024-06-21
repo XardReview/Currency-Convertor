@@ -5,7 +5,7 @@ def main(page: ft.Page):
     page.title = "Конвертор валют"
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
-    page.window_icon = "Currency Exchange.ico"
+    page.window_icon = "Icons/Currency_Exchange.ico"
     def convert(e):
         currency = currency_input.value
         try:
@@ -95,11 +95,11 @@ def main(page: ft.Page):
             new_rate = get_exchange_rate(currency_code)
             previous_rate = previous_exchange_rates.get(currency_code, new_rate)
             if new_rate > previous_rate:
-                icon_path = "Sort Up.png"
+                icon_path = "Icons/Sort Up.png"
             elif new_rate < previous_rate:
-                icon_path = "Sort Down.png"
+                icon_path = "Icons/Sort Down.png"
             else:
-                icon_path = "Minus.png"  # Add a neutral icon if needed
+                icon_path = "Icons/Minus.png"  # Add a neutral icon if needed
             previous_exchange_rates[currency_code] = new_rate
             return new_rate, icon_path
 
@@ -156,22 +156,22 @@ def main(page: ft.Page):
     result_text = ft.Text(style=ft.TextStyle(font_family="Arial", size=16))
 
     usd_exchange_rate_text = ft.Text(style=ft.TextStyle(font_family="Arial", size=16))
-    usd_exchange_rate_icon = ft.Image(src="Minus.png", width=20, height=20)
+    usd_exchange_rate_icon = ft.Image(src="Icons/Minus.png", width=20, height=20)
 
     eur_exchange_rate_text = ft.Text(style=ft.TextStyle(font_family="Arial", size=16))
-    eur_exchange_rate_icon = ft.Image(src="Minus.png", width=20, height=20)
+    eur_exchange_rate_icon = ft.Image(src="Icons/Minus.png", width=20, height=20)
 
     uzs_exchange_rate_text = ft.Text(style=ft.TextStyle(font_family="Arial", size=16))
-    uzs_exchange_rate_icon = ft.Image(src="Minus.png", width=20, height=20)
+    uzs_exchange_rate_icon = ft.Image(src="Icons/Minus.png", width=20, height=20)
 
     cny_exchange_rate_text = ft.Text(style=ft.TextStyle(font_family="Arial", size=16))
-    cny_exchange_rate_icon = ft.Image(src="Minus.png", width=20, height=20)
+    cny_exchange_rate_icon = ft.Image(src="Icons/Minus.png", width=20, height=20)
 
     inr_exchange_rate_text = ft.Text(style=ft.TextStyle(font_family="Arial", size=16))
-    inr_exchange_rate_icon = ft.Image(src="Minus.png", width=20, height=20)
+    inr_exchange_rate_icon = ft.Image(src="Icons/Minus.png", width=20, height=20)
 
     kzt_exchange_rate_text = ft.Text(style=ft.TextStyle(font_family="Arial", size=16))
-    kzt_exchange_rate_icon = ft.Image(src="Minus.png", width=20, height=20)
+    kzt_exchange_rate_icon = ft.Image(src="Icons/Minus.png", width=20, height=20)
 
     update_exchange_rates()
 
@@ -202,7 +202,7 @@ def main(page: ft.Page):
                             ft.Row([kzt_exchange_rate_text, kzt_exchange_rate_icon], alignment=ft.MainAxisAlignment.CENTER, spacing=5),
                         ],
                         alignment=ft.MainAxisAlignment.CENTER,
-                        spacing=10,
+                        spacing=10
                     ),
                     alignment=ft.alignment.center_right,
                     expand=True
