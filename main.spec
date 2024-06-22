@@ -5,7 +5,7 @@ a = Analysis(
     ['main.py'],
     pathex=[],
     binaries=[],
-    datas=[('Icons', 'Icons')],
+    datas=[],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
@@ -35,6 +35,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    version='C:\\Users\\vgats\\AppData\\Local\\Temp\\d55b338f-6dd5-440b-aaa8-d61c24bdcf9d',
-    icon=['Currency_Exchange.ico'],
+    version='C:\\Users\\vgats\\AppData\\Local\\Temp\\05c5936f-ff66-4afd-aaae-123ea63c938b',
 )
