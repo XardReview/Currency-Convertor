@@ -8,7 +8,7 @@ def main(page: ft.Page):
     page.title = "Конвертор валют"
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
-    page.window_icon = "Currency Exchange.ico"
+    page.window_icon = "Icons/Currency_Exchange.ico"
 
     def convert(e):
         currency = currency_input.value
@@ -198,18 +198,12 @@ def main(page: ft.Page):
                 ft.Container(
                     ft.Column(
                         [
-                            ft.Row([usd_exchange_rate_text, usd_exchange_rate_icon],
-                                   alignment=ft.MainAxisAlignment.CENTER, spacing=5),
-                            ft.Row([eur_exchange_rate_text, eur_exchange_rate_icon],
-                                   alignment=ft.MainAxisAlignment.CENTER, spacing=5),
-                            ft.Row([uzs_exchange_rate_text, uzs_exchange_rate_icon],
-                                   alignment=ft.MainAxisAlignment.CENTER, spacing=5),
-                            ft.Row([cny_exchange_rate_text, cny_exchange_rate_icon],
-                                   alignment=ft.MainAxisAlignment.CENTER, spacing=5),
-                            ft.Row([inr_exchange_rate_text, inr_exchange_rate_icon],
-                                   alignment=ft.MainAxisAlignment.CENTER, spacing=5),
-                            ft.Row([kzt_exchange_rate_text, kzt_exchange_rate_icon],
-                                   alignment=ft.MainAxisAlignment.CENTER, spacing=5),
+                            ft.Row([usd_exchange_rate_text, usd_exchange_rate_icon], alignment=ft.MainAxisAlignment.CENTER, spacing=5),
+                            ft.Row([eur_exchange_rate_text, eur_exchange_rate_icon], alignment=ft.MainAxisAlignment.CENTER, spacing=5),
+                            ft.Row([uzs_exchange_rate_text, uzs_exchange_rate_icon], alignment=ft.MainAxisAlignment.CENTER, spacing=5),
+                            ft.Row([cny_exchange_rate_text, cny_exchange_rate_icon], alignment=ft.MainAxisAlignment.CENTER, spacing=5),
+                            ft.Row([inr_exchange_rate_text, inr_exchange_rate_icon], alignment=ft.MainAxisAlignment.CENTER, spacing=5),
+                            ft.Row([kzt_exchange_rate_text, kzt_exchange_rate_icon], alignment=ft.MainAxisAlignment.CENTER, spacing=5),
                         ],
                         alignment=ft.MainAxisAlignment.CENTER,
                         spacing=10,
@@ -222,6 +216,5 @@ def main(page: ft.Page):
             expand=True
         )
     )
-
 
 ft.app(target=main)
